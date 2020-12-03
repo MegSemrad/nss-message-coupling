@@ -6,9 +6,12 @@
         <link rel="stylesheet" href="./styles/main.css">
     </head>
     
-<!-- '.container' is the event hub because it is the parent of 
-    both messages and themes
+<!-- 
+    '.container' is the event hub because it is the parent of 
+    both .messages and .themes, which cannot directly rely on 
+    one another 
 -->
+
     <body>
         <main class="container">
             <div class="messages"></div>
