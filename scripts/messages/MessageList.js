@@ -2,18 +2,33 @@ import { useMessages } from "./MessageProvider.js"
 import { Message } from "./Message.js"
 
 const contentTarget = document.querySelector(".messages")
-
+const eventHub = document.querySelector(".container")
 /*
-    COMPONENT FUNCTION
+- '.container' in the index.html is the event hub because it is 
+  the parent of both messages and themes
 */
+
+
+// document.querySelector(".themes").addEventListener("click", e => {
+    eventHub.addEventListener("chosenColor", event => {
+        const color = event.detail.color
+        
+        contentTarget.classList = []
+        contentTarget.classList.add(color)
+    })
+    
+    /*
+    - e stands for event it has a property of target to select that and get its id 
+    */
+
+
+
 export const MessageList = () => {
     const allMessages = useMessages()
     render(allMessages)
 }
 
-/*
-    RENDERING FUNCTION
-*/
+
 const render = messageArray => {
     const convertedMessages = messageArray.map(messageObject => {
         const messageHTML = Message(messageObject)
@@ -24,16 +39,3 @@ const render = messageArray => {
 }
 
 
-/*
-    Color the messages when one of the buttons in the ThemeButtons
-    component is clicked.
-*/
-document.querySelector(".themes").addEventListener("click", e => {
-    const idOfClickedElement = e.target.id
-
-    if (idOfClickedElement.startsWith("themeButton--")) {
-        const [prefix, color] = idOfClickedElement.split("--")
-        contentTarget.classList = []
-        contentTarget.classList.add(color)
-    }
-})
