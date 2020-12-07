@@ -35,8 +35,15 @@ eventHub.addEventListener("click", clickEvent => {
     if (clickEvent.target.id.startsWith("btnTheme--")) {
 
         const [prefix, chosenColor] = clickEvent.target.id.split("--")
+        // this above chosenColor has to match the chosenColor below in 
+        // the detail object
         
-        const colorChosenEvent = new CustomEvent("chosenColor", {
+
+        /* The CustomEvent is below example is the chosenColor in object
+           below. Whatever 'color' word is leftover at the above split
+           of the id on that specific button clicked
+        */
+        const colorChosenEvent = new CustomEvent("colorChosen", {
             detail: {
                 color: chosenColor
             }
@@ -55,3 +62,15 @@ export const ThemeButtons = () => {
         <button class="btnTheme" id="btnTheme--green">Green</button>
     `
 }
+
+
+
+/*
+
+- With this code in both ThemeButtons.js & MessageList.js - the two are now decoupled. This 
+means changes in one will not effect/break the other. It the, for example, 
+id"btnTheme--whatevercolor" is ever changed, then you merely need to to change that 
+also here in the 'if' statement. So changes only have to be made locally rather than other
+modules breaking and having to bounce around to differnt ones to make changes
+
+*/
