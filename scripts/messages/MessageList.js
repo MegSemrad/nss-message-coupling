@@ -10,9 +10,17 @@ const eventHub = document.querySelector(".container")
 
 
 // document.querySelector(".themes").addEventListener("click", e => {
-    eventHub.addEventListener("chosenColor", event => {
+    eventHub.addEventListener("colorChosen", event => {
         const color = event.detail.color
         
+        /* This below is saying take whatever color is taken from the 
+        end of the id (ex.btnTheme--purple/green/etc) when that specific
+        button  is clicked. THen use that word and turn it into a class 
+        on the contentTarget, which in this case is the element with
+        ".messages"*/
+        /* the empty array before that means switch the class back to empty. Therefore 
+        if one button was clicked after the other there wouldn't be two classes with 
+        two colors on it but rather the most current one */
         contentTarget.classList = []
         contentTarget.classList.add(color)
     })
